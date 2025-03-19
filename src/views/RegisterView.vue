@@ -25,6 +25,28 @@
             <label class="input-label">Password</label>
             <span class="input-highlight"></span>
           </div>
+
+          <div class="input-group">
+            <input 
+              v-model="form.email" 
+              type="text" 
+              required
+              class="gold-input"
+            >
+            <label class="input-label">Email</label>
+            <span class="input-highlight"></span>
+          </div>
+
+          <div class="input-group">
+            <input 
+              v-model="form.phoneNumber" 
+              type="text" 
+              required
+              class="gold-input"
+            >
+            <label class="input-label">PhoneNumber</label>
+            <span class="input-highlight"></span>
+          </div>
   
           <button type="submit" class="royal-button">
             <span class="glow-text">REGISTER NOW</span>
@@ -132,6 +154,12 @@
     color: #ffd700;
   }
   
+  /* 防止自动填充破坏样式 */
+  .gold-input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px linear-gradient(135deg, #000428 0%, #004e92 100%) inset;
+  -webkit-text-fill-color: #ffd700;
+  caret-color: #ffd700; /* 光标颜色 */
+}
   .input-highlight {
     position: absolute;
     bottom: 0;
@@ -306,14 +334,16 @@
   const router = useRouter()
   const form = ref({
     username: '',
-    password: ''
+    password: '',
+    email: '',
+    phoneNumber: ''
   })
   const errorMessage = ref('')
   
   const handleRegister = async () => {
     try {
       await register(form.value)
-      router.push('/login')
+      router.push('/register')
     } catch (error) {
       errorMessage.value = error.response?.data || '注册失败'
     }
