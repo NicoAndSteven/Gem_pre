@@ -343,7 +343,7 @@
   const handleRegister = async () => {
     try {
       await register(form.value)
-      router.push('/register')
+      router.push('/login')
     } catch (error) {
       errorMessage.value = error.response?.data || '注册失败'
     }

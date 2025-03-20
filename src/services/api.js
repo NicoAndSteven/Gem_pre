@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api', // 根据后端实际端口调整
+  baseURL: 'http://localhost:8080/gem', // 根据后端实际端口调整
   withCredentials: true
 })
 

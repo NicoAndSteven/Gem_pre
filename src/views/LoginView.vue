@@ -6,12 +6,12 @@
         <form @submit.prevent="handleLogin">
           <div class="input-group">
             <input 
-              v-model="form.username" 
+              v-model="form.phoneNumber" 
               type="text" 
               required
               class="cyber-input"
             >
-            <label class="input-label">Username</label>
+            <label class="input-label">PhoneNumber</label>
             <span class="input-highlight"></span>
           </div>
           
@@ -56,7 +56,7 @@ import { login } from '../services/api'
 const router = useRouter()
 const authStore = useAuthStore()
 const form = ref({
-  username: '',
+  phoneNumber: '',
   password: ''
 })
 const errorMessage = ref('')
