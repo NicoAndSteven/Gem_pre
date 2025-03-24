@@ -216,8 +216,9 @@ const goToProfile = () => {
   router.push('/profile')
 }
 
-const logout = () => {
-  // 登出逻辑
+function logout() {
+  localStorage.removeItem('token')
+  router.push('/login')
 }
 </script>
 

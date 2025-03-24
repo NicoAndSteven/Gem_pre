@@ -65,7 +65,7 @@ const handleLogin = async () => {
   try {
     const response = await login(form.value)
     authStore.setToken(response.token)
-    router.push('/')
+    router.push('/home')
   } catch (error) {
     errorMessage.value = error.response?.data?.message || '登录失败'
   }
