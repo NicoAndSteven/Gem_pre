@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { validateToken } from '../services/api'
 
 const routes = [
   {
@@ -33,10 +34,27 @@ const router = createRouter({
 })
 
 // 导航守卫
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('token')
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    next('/login')
+router.beforeEach(async (to, from, next) => {
+  const token = localStorage.getItem('token')
+  
+  if (to.meta.requiresAuth) {
+    if (!token) {
+      next('/login')
+      return
+    }
+    
+    try {
+      const isValid = await validateToken()
+      if (!isValid) {
+        localStorage.removeItem('token')
+        next('/login')
+        return
+      }
+      next()
+    } catch (error) {
+      localStorage.removeItem('token')
+      next('/login')
+    }
   } else {
     next()
   }
